@@ -36,16 +36,6 @@ function FakeRootThread() {
 }
 inherits(FakeRootThread, EventEmitter);
 
-function FakeVirtualThreadList() {
-  this.setRootThread = sinon.stub();
-  this.setThreadHeight = sinon.stub();
-  this.detach = sinon.stub();
-  this.yOffsetOf = function () {
-    return 100;
-  };
-}
-inherits(FakeVirtualThreadList, EventEmitter);
-
 describe('WidgetController', function () {
   var $rootScope;
   var $scope;
@@ -122,7 +112,6 @@ describe('WidgetController', function () {
       search: sinon.stub(),
     };
 
-    $provide.value('VirtualThreadList', FakeVirtualThreadList);
     $provide.value('annotationMapper', fakeAnnotationMapper);
     $provide.value('crossframe', fakeCrossFrame);
     $provide.value('drafts', fakeDrafts);
@@ -141,6 +130,9 @@ describe('WidgetController', function () {
     $scope.auth = {'status': 'unknown'};
     annotationUI = _annotationUI_;
     $controller('WidgetController', {$scope: $scope});
+
+    // Fake the controller which the thread list exposes to the parent scope
+    $scope.threadListCtrl.scrollIntoView = sinon.stub();
   }));
 
   afterEach(function () {
@@ -342,9 +334,9 @@ describe('WidgetController', function () {
       assert.notCalled($scope.clearSelection);
     });
 
-    it('scrolls the viewport to the new annotation', function () {
+    it('scrolls the thread list to the new annotation', function () {
       $rootScope.$broadcast('beforeAnnotationCreated', {$$tag: '123'});
-      assert.called(windowScroll);
+      assert.calledWith($scope.threadListCtrl.scrollIntoView, '123');
     });
   });
 
