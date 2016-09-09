@@ -3,7 +3,6 @@
       ng-style="{height: vm.virtualThreadList.offscreenUpperHeight}"></li>
   <li id="{{child.id}}"
       class="thread-list__card"
-      ng-class="{'js-hover': vm.hasFocus(child.annotation)}"
       ng-mouseenter="vm.onFocus({annotation: child.annotation})"
       ng-click="vm.onSelect({annotation: child.annotation})"
       ng-mouseleave="vm.onFocus({annotation: null})"

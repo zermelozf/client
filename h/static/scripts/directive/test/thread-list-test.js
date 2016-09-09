@@ -53,7 +53,6 @@ describe('threadList', function () {
   function createThreadList(inputs) {
     var defaultInputs = {
       ctrl: {},
-      hasFocus: sinon.stub().returns(false),
       thread: fixtures.thread,
       onForceVisible: sinon.stub(),
       onFocus: sinon.stub(),

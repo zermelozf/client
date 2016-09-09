@@ -125,10 +125,6 @@ module.exports = function () {
       /** The root thread to be displayed by the thread list. */
       thread: '<',
       showDocumentInfo: '<',
-      /**
-       * Function called to check if a given annotation is currently focused.
-       */
-      hasFocus: '&',
 
       /**
        * Called when the user clicks a link to show an annotation that does not

@@ -293,13 +293,6 @@ module.exports = function WidgetController(
   $scope.focus = focusAnnotation;
   $scope.scrollTo = scrollToAnnotation;
 
-  $scope.hasFocus = function (annotation) {
-    if (!annotation || !annotationUI.getState().focusedAnnotationMap) {
-      return false;
-    }
-    return annotation.$$tag in annotationUI.getState().focusedAnnotationMap;
-  };
-
   $scope.selectedAnnotationCount = function () {
     var selection = annotationUI.getState().selectedAnnotationMap;
     if (!selection) {
@@ -352,7 +345,7 @@ module.exports = function WidgetController(
     return thread().totalChildren;
   };
 
-  // Object on which <thread-list> exposes methods to manipulate the list 
+  // Object on which <thread-list> exposes methods to manipulate the list
   $scope.threadListCtrl = {};
 
   $scope.$on(events.BEFORE_ANNOTATION_CREATED, function (event, data) {
